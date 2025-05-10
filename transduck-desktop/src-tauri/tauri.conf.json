@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "TransDuck - 音视频转换工具",
+        "title": "TransDuck",
         "width": 1024,
         "height": 768,
         "minWidth": 800,

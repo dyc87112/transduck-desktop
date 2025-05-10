@@ -34,7 +34,7 @@
         </div>
         
         <div class="version-info">
-          <p>{{ $t('about.version') }}: 0.1.0</p>
+          <p>{{ $t('about.version') }}: {{ pkg.version }}</p>
         </div>
       </div>
     </div>
@@ -42,7 +42,8 @@
 </template>
 
 <script setup lang="ts">
-// 不需要打开链接的函数
+// 导入package.json以获取版本号
+import pkg from '../../package.json';
 </script>
 
 <style scoped>
