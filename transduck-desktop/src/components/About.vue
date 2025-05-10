@@ -11,16 +11,10 @@
       </div>
       
       <div class="about-content">
-        <div class="app-info">
-          <div class="app-logo">
-            <i class="bi bi-music-note-beamed logo-icon"></i>
-            <h3>TransDuck</h3>
-          </div>
-          <p class="app-description">{{ $t('about.appDescription') }}</p>
-        </div>
         
         <div class="links-section">
-          <h4>{{ $t('about.links') }}</h4>
+          <p class="app-description">{{ $t('about.appDescription') }}</p>
+          <br>
           <div class="link-info">
             <div class="link-item">
               <i class="bi bi-globe link-icon"></i>

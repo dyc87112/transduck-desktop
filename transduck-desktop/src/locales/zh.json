@@ -43,8 +43,8 @@
   },
   "about": {
     "title": "关于 TransDuck",
-    "description": "音频和视频转换工具",
-    "appDescription": "TransDuck 是一款功能强大且易于使用的音频和视频转换工具，可帮助您快速高效地在不同格式之间转换媒体文件。",
+    "description": "音频/视频处理工具",
+    "appDescription": "TransDuck 是一款功能强大且易于使用的音频、视频处理工具，可帮助您快速高效地实现音频格式转换、视频格式转换（更多功能不断增加中）",
     "links": "链接",
     "website": "官方网站",
     "version": "版本"
