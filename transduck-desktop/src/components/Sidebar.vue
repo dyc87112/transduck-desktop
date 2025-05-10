@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="logo-container">
-      <img src="../assets/logo.png" alt="TransDuck Logo" class="logo-image" />
+      <img src="../assets/logo2.png" alt="TransDuck Logo" class="logo-image" />
       <h3>TransDuck</h3>
     </div>
     <div class="menu">
