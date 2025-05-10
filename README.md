@@ -1,6 +1,13 @@
 # TransDuck
 
-TransDuck是一个基于Tauri和Vue实现的免费跨平台桌面应用，提供音频/视频的处理能力。
+![](https://github.com/TransDuck/transduck-desktop/blob/main/src/assets/transduck-logo.png)
+
+TransDuck是一个基于Tauri和Vue实现的免费跨平台桌面应用，提供各种音频/视频的处理能力。
+
+- 官方网站：https://transduck.com/
+- 开源地址：https://github.com/dyc87112/transduck-desktop
+
+> 目前SaaS版本的功能还未全部整合入客户端版本，后续会逐步加入到客户端，尽请期待 ^_^
 
 ## 技术栈
 
