@@ -1,6 +1,6 @@
 # TransDuck
 
-<div style="text-align: center;">
+<div align=center>
     <img src="https://github.com/dyc87112/transduck-desktop/blob/main/transduck-desktop/src/assets/transduck-logo.png" width="100" height="100">
 </div>
 
