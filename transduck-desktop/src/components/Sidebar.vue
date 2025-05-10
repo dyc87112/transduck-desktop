@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="logo-container">
+      <i class="bi bi-music-note-beamed logo-icon"></i>
       <h3>TransDuck</h3>
     </div>
     <div class="menu">
@@ -9,6 +10,7 @@
         :class="{ active: activeMenu === 'audio' }"
         @click="$emit('menu-change', 'audio')"
       >
+        <i class="bi bi-file-earmark-music menu-icon"></i>
         <span>{{ $t('app.menu.audioConversion') }}</span>
       </div>
       <div 
@@ -16,11 +18,16 @@
         :class="{ active: activeMenu === 'video' }"
         @click="$emit('menu-change', 'video')"
       >
+        <i class="bi bi-film menu-icon"></i>
         <span>{{ $t('app.menu.videoConversion') }}</span>
       </div>
     </div>
     <div class="language-selector">
-      <select v-model="currentLocale" @change="changeLocale">
+      <div class="language-label">
+        <i class="bi bi-globe"></i>
+        <span>{{ $t('app.language') }}</span>
+      </div>
+      <select v-model="currentLocale" @change="changeLocale" class="form-select">
         <option value="en">English</option>
         <option value="zh">中文</option>
       </select>
@@ -59,29 +66,42 @@ watch(() => locale.value, (newLocale) => {
 
 <style scoped>
 .sidebar {
-  width: 200px;
+  width: 220px;
   height: 100%;
   background-color: #f8f9fa;
   border-right: 1px solid #dee2e6;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo-container {
   padding: 20px;
   text-align: center;
   border-bottom: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  color: #0d6efd;
 }
 
 .menu {
   flex: 1;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 .menu-item {
   padding: 12px 20px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid transparent;
 }
 
 .menu-item:hover {
@@ -91,6 +111,14 @@ watch(() => locale.value, (newLocale) => {
 .menu-item.active {
   background-color: #e9ecef;
   font-weight: bold;
+  border-left: 4px solid #0d6efd;
+}
+
+.menu-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
 }
 
 .language-selector {
@@ -98,10 +126,29 @@ watch(() => locale.value, (newLocale) => {
   border-top: 1px solid #dee2e6;
 }
 
-.language-selector select {
+.language-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #6c757d;
+}
+
+.language-label i {
+  margin-right: 8px;
+}
+
+.form-select {
   width: 100%;
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ced4da;
+  background-color: white;
+  cursor: pointer;
+}
+
+.form-select:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 </style>

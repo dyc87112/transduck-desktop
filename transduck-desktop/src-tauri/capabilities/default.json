@@ -21,9 +21,6 @@
         },
         {
           "path": "$DOWNLOAD/**"
-        },
-        {
-          "path": "/Users/zhaiyongchao/IdeaProjects/GitHub/transduck/transduck-desktop/**"
         }
       ]
     }
