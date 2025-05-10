@@ -3,7 +3,8 @@
     "title": "TransDuck",
     "menu": {
       "audioConversion": "Audio Conversion",
-      "videoConversion": "Video Conversion"
+      "videoConversion": "Video Conversion",
+      "about": "About"
     }
   },
   "common": {
@@ -39,5 +40,13 @@
       "mov": "MOV",
       "webm": "WebM"
     }
+  },
+  "about": {
+    "title": "About TransDuck",
+    "description": "Audio and video conversion tool",
+    "appDescription": "TransDuck is a powerful and easy-to-use audio and video conversion tool that helps you convert media files between different formats quickly and efficiently.",
+    "links": "Links",
+    "website": "Official Website",
+    "version": "Version"
   }
 }

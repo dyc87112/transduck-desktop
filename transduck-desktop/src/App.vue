@@ -3,6 +3,7 @@ import { ref } from "vue";
 import Sidebar from "./components/Sidebar.vue";
 import AudioConversion from "./components/AudioConversion.vue";
 import VideoConversion from "./components/VideoConversion.vue";
+import About from "./components/About.vue";
 
 // 当前选择的功能
 const activeMenu = ref("audio");
@@ -23,6 +24,7 @@ const handleMenuChange = (menu: string) => {
       <!-- 根据当前选择的功能显示对应的组件 -->
       <AudioConversion v-if="activeMenu === 'audio'" />
       <VideoConversion v-if="activeMenu === 'video'" />
+      <About v-if="activeMenu === 'about'" />
     </div>
   </div>
 </template>

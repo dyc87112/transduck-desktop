@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="logo-container">
-      <i class="bi bi-music-note-beamed logo-icon"></i>
+      <img src="../assets/logo.png" alt="TransDuck Logo" class="logo-image" />
       <h3>TransDuck</h3>
     </div>
     <div class="menu">
@@ -21,16 +21,23 @@
         <i class="bi bi-film menu-icon"></i>
         <span>{{ $t('app.menu.videoConversion') }}</span>
       </div>
+      <div 
+        class="menu-item" 
+        :class="{ active: activeMenu === 'about' }"
+        @click="$emit('menu-change', 'about')"
+      >
+        <i class="bi bi-info-circle menu-icon"></i>
+        <span>{{ $t('app.menu.about') }}</span>
+      </div>
     </div>
     <div class="language-selector">
-      <div class="language-label">
-        <i class="bi bi-globe"></i>
-        <span>{{ $t('app.language') }}</span>
+      <div class="language-container">
+        <i class="bi bi-globe language-icon"></i>
+        <select v-model="currentLocale" @change="changeLocale" class="form-select">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+        </select>
       </div>
-      <select v-model="currentLocale" @change="changeLocale" class="form-select">
-        <option value="en">English</option>
-        <option value="zh">中文</option>
-      </select>
     </div>
   </div>
 </template>
@@ -85,9 +92,10 @@ watch(() => locale.value, (newLocale) => {
   gap: 10px;
 }
 
-.logo-icon {
-  font-size: 1.8rem;
-  color: #0d6efd;
+.logo-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .menu {
@@ -126,19 +134,19 @@ watch(() => locale.value, (newLocale) => {
   border-top: 1px solid #dee2e6;
 }
 
-.language-label {
+.language-container {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  gap: 10px;
+}
+
+.language-icon {
+  font-size: 1.2rem;
   color: #6c757d;
 }
 
-.language-label i {
-  margin-right: 8px;
-}
-
 .form-select {
-  width: 100%;
+  flex: 1;
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ced4da;

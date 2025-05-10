@@ -3,7 +3,8 @@
     "title": "TransDuck",
     "menu": {
       "audioConversion": "音频转换",
-      "videoConversion": "视频转换"
+      "videoConversion": "视频转换",
+      "about": "关于"
     }
   },
   "common": {
@@ -39,5 +40,13 @@
       "mov": "MOV",
       "webm": "WebM"
     }
+  },
+  "about": {
+    "title": "关于 TransDuck",
+    "description": "音频和视频转换工具",
+    "appDescription": "TransDuck 是一款功能强大且易于使用的音频和视频转换工具，可帮助您快速高效地在不同格式之间转换媒体文件。",
+    "links": "链接",
+    "website": "官方网站",
+    "version": "版本"
   }
 }
