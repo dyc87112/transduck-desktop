@@ -1,0 +1,43 @@
+{
+  "app": {
+    "title": "TransDuck",
+    "menu": {
+      "audioConversion": "音频转换",
+      "videoConversion": "视频转换"
+    }
+  },
+  "common": {
+    "selectFile": "选择文件",
+    "outputFormat": "输出格式",
+    "convert": "转换",
+    "converting": "转换中...",
+    "completed": "转换完成",
+    "failed": "转换失败",
+    "outputLocation": "输出位置",
+    "open": "打开",
+    "progress": "进度",
+    "cancel": "取消"
+  },
+  "audio": {
+    "title": "音频转换",
+    "description": "将音频文件转换为不同格式",
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV",
+      "ogg": "OGG",
+      "flac": "FLAC",
+      "aac": "AAC"
+    }
+  },
+  "video": {
+    "title": "视频转换",
+    "description": "将视频文件转换为不同格式",
+    "formats": {
+      "mp4": "MP4",
+      "mkv": "MKV",
+      "avi": "AVI",
+      "mov": "MOV",
+      "webm": "WebM"
+    }
+  }
+}

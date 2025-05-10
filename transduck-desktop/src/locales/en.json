@@ -1,0 +1,43 @@
+{
+  "app": {
+    "title": "TransDuck",
+    "menu": {
+      "audioConversion": "Audio Conversion",
+      "videoConversion": "Video Conversion"
+    }
+  },
+  "common": {
+    "selectFile": "Select File",
+    "outputFormat": "Output Format",
+    "convert": "Convert",
+    "converting": "Converting...",
+    "completed": "Conversion Completed",
+    "failed": "Conversion Failed",
+    "outputLocation": "Output Location",
+    "open": "Open",
+    "progress": "Progress",
+    "cancel": "Cancel"
+  },
+  "audio": {
+    "title": "Audio Conversion",
+    "description": "Convert audio files to different formats",
+    "formats": {
+      "mp3": "MP3",
+      "wav": "WAV",
+      "ogg": "OGG",
+      "flac": "FLAC",
+      "aac": "AAC"
+    }
+  },
+  "video": {
+    "title": "Video Conversion",
+    "description": "Convert video files to different formats",
+    "formats": {
+      "mp4": "MP4",
+      "mkv": "MKV",
+      "avi": "AVI",
+      "mov": "MOV",
+      "webm": "WebM"
+    }
+  }
+}
