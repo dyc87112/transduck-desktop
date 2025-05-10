@@ -1,6 +1,6 @@
 # TransDuck
 
-![](https://github.com/dyc87112/transduck-desktop/blob/main/transduck-desktop/src/assets/transduck-logo.png)
+<img src="https://github.com/dyc87112/transduck-desktop/blob/main/transduck-desktop/src/assets/transduck-logo.png" width="100" height="100">
 
 TransDuck是一个基于Tauri和Vue实现的免费跨平台桌面应用，提供各种音频/视频的处理能力。
 
