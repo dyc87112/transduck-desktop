@@ -1,92 +1,121 @@
 <template>
   <div class="conversion-container">
-    <!-- 任务配置区 -->
-    <div class="config-section">
-      <div class="section-header">
-        <i class="bi bi-music-note-beamed section-icon"></i>
-        <div>
-          <h2>{{ $t('audio.title') }}</h2>
-          <p>{{ $t('audio.description') }}</p>
+    <div class="card main-card">
+      <!-- 页面标题 -->
+      <div class="card-header">
+        <div class="header-content">
+          <i class="bi bi-music-note-beamed header-icon"></i>
+          <div>
+            <h2>{{ $t('audio.title') }}</h2>
+            <p class="text-muted mb-0">{{ $t('audio.description') }}</p>
+          </div>
         </div>
       </div>
       
-      <div class="form-group">
-        <label><i class="bi bi-file-earmark-music"></i> {{ $t('common.selectFile') }}</label>
-        <div class="file-input-container">
-          <div class="input-group">
-            <span class="input-group-text" v-if="selectedFile">
-              <i class="bi bi-check-circle-fill text-success"></i>
-            </span>
-            <span class="input-group-text" v-else>
-              <i class="bi bi-music-note"></i>
-            </span>
-            <input type="text" readonly :value="selectedFile || ''" class="form-control" placeholder="未选择文件" />
-            <button @click="openFileDialog" class="btn btn-primary">
-              <i class="bi bi-folder2-open"></i> {{ $t('common.selectFile') }}
+      <div class="card-body">
+        <!-- 文件选择 -->
+        <div class="form-group">
+          <label class="form-label">
+            <i class="bi bi-file-earmark-music"></i> {{ $t('common.selectFile') }}
+          </label>
+          <div class="file-selector">
+            <div class="file-input-wrapper">
+              <div class="file-status-icon">
+                <i v-if="selectedFile" class="bi bi-check-circle-fill text-success"></i>
+                <i v-else class="bi bi-music-note text-muted"></i>
+              </div>
+              <input 
+                type="text" 
+                readonly 
+                :value="selectedFile || ''" 
+                class="form-control" 
+                :placeholder="$t('common.selectFile')" 
+              />
+            </div>
+            <button @click="openFileDialog" class="btn btn-primary select-btn">
+              <i class="bi bi-folder2-open"></i> {{ $t('common.open') }}
             </button>
           </div>
         </div>
-      </div>
-      
-      <div class="form-group">
-        <label><i class="bi bi-arrow-left-right"></i> {{ $t('common.outputFormat') }}</label>
-        <div class="radio-group">
-          <div v-for="(name, format) in audioFormats" :key="format" class="radio-option">
-            <input type="radio" :id="`audio-format-${format}`" :value="format" v-model="outputFormat" :name="'audioFormat'" />
-            <label :for="`audio-format-${format}`" class="format-label">{{ name }}</label>
+        
+        <!-- 输出格式选择 -->
+        <div class="form-group">
+          <label class="form-label">
+            <i class="bi bi-arrow-left-right"></i> {{ $t('common.outputFormat') }}
+          </label>
+          <div class="format-selector">
+            <div v-for="(name, format) in audioFormats" :key="format" class="format-option">
+              <input 
+                type="radio" 
+                :id="`audio-format-${format}`" 
+                :value="format" 
+                v-model="outputFormat" 
+                :name="'audioFormat'" 
+              />
+              <label :for="`audio-format-${format}`" class="format-label">{{ name }}</label>
+            </div>
           </div>
-        </div>
-      </div>
-      
-      <button 
-        @click="startConversion" 
-        class="btn btn-success conversion-btn" 
-        :disabled="!selectedFile || isConverting"
-      >
-        <i class="bi" :class="isConverting ? 'bi-arrow-repeat spin' : 'bi-arrow-right-circle'"></i>
-        {{ isConverting ? $t('common.converting') : $t('common.convert') }}
-      </button>
-    </div>
-    
-    <!-- 任务执行结果显示区 -->
-    <div class="result-section">
-      <div v-if="isConverting" class="status-container">
-        <div class="converting-status">
-          <i class="bi bi-arrow-repeat spin status-icon"></i>
-          <h3>{{ $t('common.converting') }}</h3>
         </div>
         
-        <button 
-          @click="cancelConversion" 
-          class="btn btn-danger mt-3"
-        >
-          <i class="bi bi-x-circle"></i> {{ $t('common.cancel') }}
-        </button>
-      </div>
-      
-      <div v-if="conversionCompleted && !conversionError" class="result-info">
-        <div class="alert alert-success result-card">
-          <div class="result-header">
-            <i class="bi bi-check-circle-fill result-icon"></i>
-            <h4>{{ $t('common.completed') }}</h4>
-          </div>
-          <p class="output-path">
-            <i class="bi bi-file-earmark-check"></i> 
-            {{ $t('common.outputLocation') }}: <span class="path-text">{{ outputPath }}</span>
-          </p>
-          <button @click="openOutputFolder" class="btn btn-info">
-            <i class="bi bi-folder2-open"></i> {{ $t('common.open') }}
+        <!-- 转换按钮 -->
+        <div class="action-area">
+          <button 
+            @click="startConversion" 
+            class="btn btn-success conversion-btn" 
+            :disabled="!selectedFile || isConverting"
+          >
+            <i class="bi" :class="isConverting ? 'bi-arrow-repeat spin' : 'bi-arrow-right-circle'"></i>
+            {{ isConverting ? $t('common.converting') : $t('common.convert') }}
           </button>
         </div>
-      </div>
-      
-      <div v-if="conversionError" class="result-info">
-        <div class="alert alert-danger result-card">
+        
+        <!-- 转换状态 -->
+        <div v-if="isConverting" class="status-card">
+          <div class="converting-status">
+            <div class="status-icon-wrapper">
+              <i class="bi bi-arrow-repeat spin"></i>
+            </div>
+            <h3>{{ $t('common.converting') }}</h3>
+            <button 
+              @click="cancelConversion" 
+              class="btn btn-outline-danger cancel-btn"
+            >
+              <i class="bi bi-x-circle"></i> {{ $t('common.cancel') }}
+            </button>
+          </div>
+        </div>
+        
+        <!-- 转换成功结果 -->
+        <div v-if="conversionCompleted && !conversionError" class="result-card success">
           <div class="result-header">
-            <i class="bi bi-exclamation-triangle-fill result-icon"></i>
+            <div class="result-icon-wrapper success">
+              <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <h4>{{ $t('common.completed') }}</h4>
+          </div>
+          <div class="result-content">
+            <div class="output-path">
+              <i class="bi bi-file-earmark-check"></i> 
+              <span>{{ $t('common.outputLocation') }}:</span>
+              <code class="path-text">{{ outputPath }}</code>
+            </div>
+            <button @click="openOutputFolder" class="btn btn-outline-primary open-btn">
+              <i class="bi bi-folder2-open"></i> {{ $t('common.open') }}
+            </button>
+          </div>
+        </div>
+        
+        <!-- 转换失败结果 -->
+        <div v-if="conversionError" class="result-card error">
+          <div class="result-header">
+            <div class="result-icon-wrapper error">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
             <h4>{{ $t('common.failed') }}</h4>
           </div>
-          <p class="error-message">{{ conversionError }}</p>
+          <div class="result-content">
+            <div class="error-message">{{ conversionError }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -199,92 +228,219 @@ const openOutputFolder = async () => {
 </script>
 
 <style scoped>
+/* 主容器样式 */
 .conversion-container {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 20px;
+  background-color: #f9fafb;
 }
 
-.section-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 15px;
-}
-
-.section-icon {
-  font-size: 2rem;
-  color: #0d6efd;
-}
-
-.config-section {
-  padding: 25px;
-  border-bottom: 1px solid #dee2e6;
-  background-color: #f8f9fa;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.result-section {
-  flex: 1;
-  padding: 25px;
-  overflow-y: auto;
+.main-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   background-color: #fff;
-  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: none;
 }
 
+/* 卡片头部样式 */
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eaedf0;
+  padding: 20px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon {
+  font-size: 2rem;
+  color: #4361ee;
+  background-color: rgba(67, 97, 238, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.card-header h2 {
+  margin: 0 0 5px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+/* 卡片内容区域 */
+.card-body {
+  padding: 24px;
+}
+
+/* 表单元素样式 */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.form-group label {
+.form-label {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 500;
-  color: #495057;
+  color: #4a5568;
 }
 
-.form-group label i {
+.form-label i {
   margin-right: 8px;
-  color: #0d6efd;
+  color: #4361ee;
 }
 
-.file-input-container {
+/* 文件选择器样式 */
+.file-selector {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
-.file-input-container input {
+.file-input-wrapper {
   flex: 1;
-}
-
-.input-group {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.input-group-text {
   display: flex;
   align-items: center;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #f8f9fa;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem 0 0 0.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0 12px;
+  background-color: #fff;
+  transition: all 0.2s ease;
 }
 
-.status-container {
-  margin-bottom: 25px;
-  background-color: #f8f9fa;
-  padding: 25px;
+.file-input-wrapper:focus-within {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+.file-status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  color: #4361ee;
+}
+
+.text-success {
+  color: #10b981;
+}
+
+.text-muted {
+  color: #9ca3af;
+}
+
+.form-control {
+  flex: 1;
+  border: none;
+  padding: 12px 0;
+  font-size: 0.95rem;
+  background: transparent;
+  color: #4a5568;
+}
+
+.form-control:focus {
+  outline: none;
+}
+
+.select-btn {
+  white-space: nowrap;
+  padding: 10px 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 格式选择器样式 */
+.format-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.format-option {
+  position: relative;
+}
+
+.format-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.format-label {
+  display: block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  color: #4a5568;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  margin: 0;
+  min-width: 60px;
+}
+
+.format-option input[type="radio"]:checked + .format-label {
+  background-color: #4361ee;
+  color: white;
+  box-shadow: 0 2px 10px rgba(67, 97, 238, 0.3);
+}
+
+.format-option input[type="radio"]:focus + .format-label {
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+/* 操作区域样式 */
+.action-area {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.conversion-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #4361ee;
+  border-color: #4361ee;
+  transition: all 0.2s ease;
+}
+
+.conversion-btn:hover:not(:disabled) {
+  background-color: #3a56d4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+}
+
+.conversion-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 状态卡片样式 */
+.status-card {
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   text-align: center;
 }
 
@@ -292,218 +448,209 @@ const openOutputFolder = async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 16px;
 }
 
-.status-icon {
-  font-size: 3rem;
-  color: #0d6efd;
+.status-icon-wrapper {
+  font-size: 2.5rem;
+  color: #4361ee;
+  height: 70px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(67, 97, 238, 0.1);
+  border-radius: 50%;
+  margin-bottom: 8px;
 }
 
 .converting-status h3 {
-  color: #495057;
   margin: 0;
+  color: #4a5568;
+  font-weight: 600;
 }
 
-.mt-3 {
-  margin-top: 1rem;
-}
-
-.result-info {
-  margin-top: 20px;
-}
-
-.result-card {
+.cancel-btn {
+  margin-top: 8px;
+  padding: 8px 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+}
+
+/* 结果卡片样式 */
+.result-card {
+  margin-top: 24px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.result-card.success {
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+}
+
+.result-card.error {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
 }
 
 .result-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.result-icon {
+.result-icon-wrapper {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   font-size: 1.5rem;
 }
 
+.result-icon-wrapper.success {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.result-icon-wrapper.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.result-header h4 {
+  margin: 0;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.result-content {
+  padding: 16px 0;
+}
+
 .output-path {
-  background-color: rgba(0, 0, 0, 0.03);
-  padding: 12px;
-  border-radius: 5px;
-  margin: 15px 0;
   display: flex;
   align-items: center;
   gap: 8px;
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.output-path i {
+  color: #10b981;
 }
 
 .path-text {
   font-family: monospace;
   word-break: break-all;
-  margin-left: 5px;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 4px;
+  flex: 1;
 }
 
 .error-message {
-  background-color: rgba(0, 0, 0, 0.03);
-  padding: 12px;
-  border-radius: 5px;
-  color: #842029;
+  background-color: rgba(239, 68, 68, 0.05);
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #b91c1c;
+  font-size: 0.95rem;
 }
 
-.form-control {
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0 0.25rem 0.25rem 0;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
 }
 
+/* 按钮样式 */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
   border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: all 0.15s ease-in-out;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .btn i {
-  margin-right: 5px;
+  margin-right: 6px;
 }
 
 .btn-primary {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #4361ee;
+  border-color: #4361ee;
 }
 
-.btn-primary:hover {
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
+.btn-primary:hover:not(:disabled) {
+  background-color: #3a56d4;
+  border-color: #3a56d4;
 }
 
-.btn-success {
+.btn-outline-danger {
+  color: #ef4444;
+  background-color: transparent;
+  border-color: #ef4444;
+}
+
+.btn-outline-danger:hover {
   color: #fff;
-  background-color: #198754;
-  border-color: #198754;
+  background-color: #ef4444;
 }
 
-.btn-success:hover {
-  background-color: #157347;
-  border-color: #146c43;
+.btn-outline-primary {
+  color: #4361ee;
+  background-color: transparent;
+  border-color: #4361ee;
 }
 
-.btn-danger {
+.btn-outline-primary:hover {
   color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: #4361ee;
 }
 
-.btn-danger:hover {
-  background-color: #bb2d3b;
-  border-color: #b02a37;
-}
-
-.btn-info {
-  color: #fff;
-  background-color: #0dcaf0;
-  border-color: #0dcaf0;
-}
-
-.btn-info:hover {
-  background-color: #31d2f2;
-  border-color: #25cff2;
-}
-
-.alert {
-  position: relative;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-}
-
-.alert-success {
-  color: #0f5132;
-  background-color: #d1e7dd;
-  border-color: #badbcc;
-}
-
-.alert-danger {
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.radio-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-}
-
-.radio-option input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-}
-
-.format-label {
-  margin-bottom: 0;
-  cursor: pointer;
-  padding: 8px 15px;
-  border-radius: 20px;
-  background-color: #e9ecef;
-  transition: all 0.2s;
-  font-weight: 500;
-}
-
-.radio-option input[type="radio"]:checked + .format-label {
-  background-color: #0d6efd;
-  color: white;
-  box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
-}
-
-.conversion-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  font-weight: 500;
-}
-
+/* 动画效果 */
 .spin {
-  animation: spin 1s linear infinite;
+  animation: spin 1.2s linear infinite;
 }
 
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .file-selector {
+    flex-direction: column;
+  }
+  
+  .select-btn {
+    width: 100%;
+  }
+  
+  .format-selector {
+    justify-content: space-between;
+  }
+  
+  .format-label {
+    min-width: auto;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
 }
 </style>
