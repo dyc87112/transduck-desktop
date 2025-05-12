@@ -26,8 +26,15 @@ brew install nsis
 brew install llvm
 # Install the Windows Rust target
 rustup target add x86_64-pc-windows-msvc
+
 # Install cargo-xwin
 cargo install --locked cargo-xwin
+```
+
+```bash
+# 32位系统和ARM系统打包需要的依赖
+rustup target add aarch64-pc-windows-msvc
+rustup target add i686-pc-windows-msvc
 ```
 
 2. 开始打包
