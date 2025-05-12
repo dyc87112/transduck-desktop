@@ -9,6 +9,14 @@
 
 以下是基于MacOS打开，制作不同平台安装包的方法
 
+国内安装加速：
+
+```bash
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+sh rustup-init.sh
+```
+
 ### 制作MacOS安装包
 
 - 打包命令: `npm run tauri build`
