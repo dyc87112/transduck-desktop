@@ -33,5 +33,10 @@ cargo install --locked cargo-xwin
 2. 开始打包
 
 ```bash
+# 为64位系统打包
 npm run tauri build -- --runner cargo-xwin --target x86_64-pc-windows-msvc
+# 为32位系统打包
+npm run tauri build -- --target i686-pc-windows-msvc
+# 为ARM系统打包
+npm run tauri build -- --target aarch64-pc-windows-msvc
 ```
