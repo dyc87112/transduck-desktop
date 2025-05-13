@@ -15,9 +15,6 @@
       <div class="card-body">
         <!-- 文件选择 -->
         <div class="form-group">
-          <label class="form-label">
-            <i class="bi bi-camera-video"></i> {{ $t('common.selectFile') }}
-          </label>
           <div class="file-selector">
             <div class="file-input-wrapper">
               <div class="file-status-icon">
