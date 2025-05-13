@@ -1,3 +1,6 @@
 {
-    "nuxt.isNuxtApp": false
+    "nuxt.isNuxtApp": false,
+    "rust-analyzer.linkedProjects": [
+        "transduck-desktop/src-tauri/Cargo.toml"
+    ]
 }
