@@ -47,29 +47,15 @@ import pkg from '../../package.json';
 </script>
 
 <style scoped>
+@import '../styles/common.css';
+
 .about-container {
-  display: flex;
-  flex-direction: column;
+  padding: 20px;
   height: 100%;
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  gap: 15px;
-}
-
-.section-icon {
-  font-size: 2rem;
-  color: #0d6efd;
 }
 
 .about-section {
   padding: 25px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .about-content {
@@ -79,43 +65,17 @@ import pkg from '../../package.json';
   gap: 30px;
 }
 
-.app-info {
-  text-align: center;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.app-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.logo-icon {
-  font-size: 2.5rem;
-  color: #0d6efd;
-}
-
 .app-description {
-  margin-top: 15px;
-  color: #495057;
+  color: #4a5568;
   line-height: 1.6;
+  font-size: 1rem;
 }
 
 .links-section {
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.links-section h4 {
-  margin-bottom: 15px;
-  color: #495057;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .link-info {
@@ -128,69 +88,63 @@ import pkg from '../../package.json';
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 12px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.link-item:hover {
+  background-color: #f1f5f9;
+  transform: translateY(-1px);
 }
 
 .link-icon {
   font-size: 1.5rem;
-  color: #0d6efd;
+  color: #4361ee;
 }
 
 .link-label {
   font-weight: 500;
-  color: #495057;
+  color: #4a5568;
   margin-right: 5px;
 }
 
 .link-url {
-  color: #0d6efd;
+  color: #4361ee;
   word-break: break-all;
+  text-decoration: none;
+}
+
+.link-url:hover {
+  text-decoration: underline;
 }
 
 .version-info {
   text-align: center;
   color: #6c757d;
+  padding: 16px;
+  background-color: #f8fafc;
+  border-radius: 8px;
 }
 
-.btn {
-  display: inline-block;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  transition: all 0.15s ease-in-out;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn i {
-  margin-right: 5px;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-
-.btn-primary:hover {
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
-}
-
-.btn-dark {
-  color: #fff;
-  background-color: #212529;
-  border-color: #212529;
-}
-
-.btn-dark:hover {
-  background-color: #1c1f23;
-  border-color: #1a1e21;
+@media (max-width: 768px) {
+  .about-container {
+    padding: 15px;
+  }
+  
+  .about-section {
+    padding: 20px;
+  }
+  
+  .link-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+  }
+  
+  .link-icon {
+    margin-bottom: 8px;
+  }
 }
 </style>

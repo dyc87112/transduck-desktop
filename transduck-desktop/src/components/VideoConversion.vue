@@ -227,81 +227,13 @@ const openOutputFolder = async () => {
 </script>
 
 <style scoped>
+@import '../styles/common.css';
+
 /* 主容器样式 */
 .conversion-container {
-  display: flex;
-  flex-direction: column;
+  padding: 20px;
   height: 100%;
-  padding: 20px;
   background-color: #f9fafb;
-}
-
-.main-card {
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  background-color: #fff;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-/* 卡片头部样式 */
-.card-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #eaedf0;
-  padding: 20px;
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.header-icon {
-  font-size: 2rem;
-  color: #4361ee;
-  background-color: rgba(67, 97, 238, 0.1);
-  padding: 12px;
-  border-radius: 12px;
-}
-
-.card-header h2 {
-  margin: 0 0 5px 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2d3748;
-}
-
-.text-muted {
-  color: #6c757d;
-}
-
-.mb-0 {
-  margin-bottom: 0;
-}
-
-/* 卡片内容区域 */
-.card-body {
-  padding: 24px;
-}
-
-/* 表单元素样式 */
-.form-group {
-  margin-bottom: 24px;
-}
-
-.form-label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  font-weight: 500;
-  color: #4a5568;
-}
-
-.form-label i {
-  margin-right: 8px;
-  color: #4361ee;
 }
 
 /* 文件选择器样式 */
@@ -355,12 +287,6 @@ const openOutputFolder = async () => {
   outline: none;
 }
 
-.select-btn {
-  white-space: nowrap;
-  padding: 10px 16px;
-  border-radius: 8px;
-}
-
 /* 格式选择器样式 */
 .format-selector {
   display: flex;
@@ -410,22 +336,8 @@ const openOutputFolder = async () => {
 }
 
 .conversion-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   padding: 12px 24px;
-  font-weight: 500;
   font-size: 1rem;
-  border-radius: 8px;
-  background-color: #4361ee;
-  border-color: #4361ee;
-  transition: all 0.2s ease;
-}
-
-.conversion-btn:hover:not(:disabled) {
-  background-color: #3a56d4;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
 }
 
 .conversion-btn:disabled {
@@ -434,25 +346,16 @@ const openOutputFolder = async () => {
 }
 
 /* 状态卡片样式 */
-.status-card {
-  background-color: #f8fafc;
-  border-radius: 12px;
-  padding: 24px;
-  margin-top: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
 .converting-status {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  text-align: center;
 }
 
 .status-icon-wrapper {
   font-size: 2.5rem;
-  color: #4361ee;
   height: 70px;
   width: 70px;
   display: flex;
@@ -465,34 +368,10 @@ const openOutputFolder = async () => {
 
 .converting-status h3 {
   margin: 0;
-  color: #4a5568;
   font-weight: 600;
 }
 
-.cancel-btn {
-  margin-top: 8px;
-  padding: 8px 16px;
-  border-radius: 8px;
-}
-
 /* 结果卡片样式 */
-.result-card {
-  margin-top: 24px;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.result-card.success {
-  background-color: #f0fdf4;
-  border: 1px solid #dcfce7;
-}
-
-.result-card.error {
-  background-color: #fef2f2;
-  border: 1px solid #fee2e2;
-}
-
 .result-header {
   display: flex;
   align-items: center;
@@ -518,12 +397,6 @@ const openOutputFolder = async () => {
 .result-icon-wrapper.error {
   background-color: rgba(239, 68, 68, 0.1);
   color: #ef4444;
-}
-
-.result-header h4 {
-  margin: 0;
-  font-weight: 600;
-  color: #4a5568;
 }
 
 .result-content {
@@ -563,83 +436,14 @@ const openOutputFolder = async () => {
   font-size: 0.95rem;
 }
 
-.open-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 8px;
-}
-
-/* 按钮样式 */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  border: 1px solid transparent;
-  padding: 0.5rem 1rem;
-  font-size: 0.95rem;
-  border-radius: 0.375rem;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.btn i {
-  margin-right: 6px;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #4361ee;
-  border-color: #4361ee;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background-color: #3a56d4;
-  border-color: #3a56d4;
-}
-
-.btn-outline-danger {
-  color: #ef4444;
-  background-color: transparent;
-  border-color: #ef4444;
-}
-
-.btn-outline-danger:hover {
-  color: #fff;
-  background-color: #ef4444;
-}
-
-.btn-outline-primary {
-  color: #4361ee;
-  background-color: transparent;
-  border-color: #4361ee;
-}
-
-.btn-outline-primary:hover {
-  color: #fff;
-  background-color: #4361ee;
-}
-
-/* 动画效果 */
-.spin {
-  animation: spin 1.2s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 /* 响应式调整 */
 @media (max-width: 768px) {
+  .conversion-container {
+    padding: 15px;
+  }
+
   .file-selector {
     flex-direction: column;
-  }
-  
-  .select-btn {
-    width: 100%;
   }
   
   .format-selector {

@@ -231,170 +231,71 @@ const openOutputFolder = async () => {
 </script>
 
 <style scoped>
+@import '../styles/common.css';
+
 .conversion-container {
   padding: 20px;
-  max-width: 900px;
-  margin: 0 auto;
+  height: 100%;
+  background-color: #f9fafb;
 }
 
-.card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.main-card {
-  border: 1px solid #e0e0e0;
-}
-
-.card-header {
-  background-color: #f8f9fa;
-  padding: 15px 20px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-}
-
-.header-icon {
-  font-size: 2rem;
-  margin-right: 15px;
-  color: #4a86e8;
-}
-
-.card-header h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.text-muted {
-  color: #6c757d;
-}
-
-.card-body {
-  padding: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #333;
-}
-
-.form-label i {
-  margin-right: 5px;
-  color: #4a86e8;
-}
-
+/* 文件选择器样式 */
 .file-selector {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .file-input-wrapper {
   flex: 1;
-  position: relative;
   display: flex;
   align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0 12px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+.file-input-wrapper:focus-within {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
 }
 
 .file-status-icon {
-  position: absolute;
-  left: 10px;
-  z-index: 1;
-  color: #4a86e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  color: #4361ee;
+}
+
+.text-success {
+  color: #10b981;
+}
+
+.text-muted {
+  color: #9ca3af;
 }
 
 .form-control {
-  width: 100%;
-  padding: 10px 10px 10px 35px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  background-color: #f8f9fa;
-  cursor: default;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  flex: 1;
   border: none;
-  gap: 5px;
+  padding: 12px 0;
+  font-size: 0.95rem;
+  background: transparent;
+  color: #4a5568;
 }
 
-.btn i {
-  font-size: 1rem;
+.form-control:focus {
+  outline: none;
 }
 
-.btn-primary {
-  background-color: #4a86e8;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #3a76d8;
-}
-
-.btn-success {
-  background-color: #34a853;
-  color: white;
-}
-
-.btn-success:hover {
-  background-color: #2d9249;
-}
-
-.btn-success:disabled {
-  background-color: #a8d5b5;
-  cursor: not-allowed;
-}
-
-.btn-outline-danger {
-  background-color: transparent;
-  border: 1px solid #ea4335;
-  color: #ea4335;
-}
-
-.btn-outline-danger:hover {
-  background-color: #ea4335;
-  color: white;
-}
-
-.btn-outline-primary {
-  background-color: transparent;
-  border: 1px solid #4a86e8;
-  color: #4a86e8;
-}
-
-.btn-outline-primary:hover {
-  background-color: #4a86e8;
-  color: white;
-}
-
+/* 格式选择器样式 */
 .format-selector {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 8px;
 }
 
 .format-option {
@@ -404,181 +305,180 @@ const openOutputFolder = async () => {
 .format-option input[type="radio"] {
   position: absolute;
   opacity: 0;
-  width: 0;
-  height: 0;
 }
 
 .format-label {
-  display: inline-block;
-  padding: 8px 16px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  display: block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  color: #4a5568;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: #f8f9fa;
+  text-align: center;
+  margin: 0;
+  min-width: 60px;
 }
 
 .format-option input[type="radio"]:checked + .format-label {
-  background-color: #4a86e8;
+  background-color: #4361ee;
   color: white;
-  border-color: #4a86e8;
+  box-shadow: 0 2px 10px rgba(67, 97, 238, 0.3);
 }
 
+.format-option input[type="radio"]:focus + .format-label {
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+/* 操作区域样式 */
 .action-area {
-  margin-top: 25px;
   display: flex;
   justify-content: center;
+  margin: 24px 0;
 }
 
 .conversion-btn {
-  padding: 10px 25px;
+  padding: 12px 24px;
   font-size: 1rem;
 }
 
-.status-card {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f8f9fa;
-  border: 1px solid #e0e0e0;
+.conversion-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.converting-status {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.status-icon-wrapper {
-  font-size: 2rem;
-  color: #4a86e8;
-  margin-bottom: 10px;
-}
-
+/* 进度条样式 */
 .progress-container {
   width: 100%;
   margin: 15px 0;
 }
 
 .progress-bar {
-  height: 10px;
-  background-color: #e0e0e0;
-  border-radius: 5px;
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 5px;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: #4a86e8;
+  background-color: #4361ee;
   transition: width 0.3s ease;
 }
 
 .progress-text {
+  margin-top: 8px;
   text-align: center;
   font-size: 0.9rem;
-  color: #666;
+  color: #64748b;
 }
 
-.cancel-btn {
-  margin-top: 10px;
+/* 状态卡片样式 */
+.converting-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
 }
 
-.result-card {
-  margin-top: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.result-card.success {
-  border: 1px solid #34a853;
-  background-color: #e6f4ea;
-}
-
-.result-card.error {
-  border: 1px solid #ea4335;
-  background-color: #fce8e6;
-}
-
-.result-header {
-  padding: 15px;
+.status-icon-wrapper {
+  font-size: 2.5rem;
+  height: 70px;
+  width: 70px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  background-color: rgba(67, 97, 238, 0.1);
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.converting-status h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* 结果卡片样式 */
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .result-icon-wrapper {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   font-size: 1.5rem;
 }
 
 .result-icon-wrapper.success {
-  color: #34a853;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
 }
 
 .result-icon-wrapper.error {
-  color: #ea4335;
-}
-
-.result-header h4 {
-  margin: 0;
-  font-size: 1.2rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
 }
 
 .result-content {
-  padding: 0 15px 15px;
+  padding: 16px 0;
 }
 
 .output-path {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 15px;
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 
 .path-text {
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 4px 8px;
-  border-radius: 4px;
   font-family: monospace;
   word-break: break-all;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 4px;
+  flex: 1;
 }
 
 .error-message {
-  color: #ea4335;
-  font-family: monospace;
-  white-space: pre-wrap;
-  background-color: rgba(234, 67, 53, 0.05);
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.open-btn {
-  margin-top: 5px;
-}
-
-.spin {
-  animation: spin 1.5s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  background-color: rgba(239, 68, 68, 0.05);
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #b91c1c;
+  font-size: 0.95rem;
 }
 
 /* 响应式调整 */
 @media (max-width: 768px) {
+  .conversion-container {
+    padding: 15px;
+  }
+
   .file-selector {
     flex-direction: column;
   }
   
-  .select-btn {
-    width: 100%;
+  .format-selector {
+    justify-content: space-between;
   }
   
-  .format-selector {
-    justify-content: center;
+  .format-label {
+    min-width: auto;
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 }
 </style>
