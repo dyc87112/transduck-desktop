@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "Vue.volar",
+    "henrynguyen5-vsc.vsc-nvm",
     "tauri-apps.tauri-vscode",
     "rust-lang.rust-analyzer"
   ]
