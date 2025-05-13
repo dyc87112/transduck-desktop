@@ -23,6 +23,14 @@
       </div>
       <div 
         class="menu-item" 
+        :class="{ active: activeMenu === 'videoAudio' }"
+        @click="$emit('menu-change', 'videoAudio')"
+      >
+        <i class="bi bi-music-note-beamed menu-icon"></i>
+        <span>{{ $t('app.menu.videoAudioExtraction') }}</span>
+      </div>
+      <div 
+        class="menu-item" 
         :class="{ active: activeMenu === 'about' }"
         @click="$emit('menu-change', 'about')"
       >

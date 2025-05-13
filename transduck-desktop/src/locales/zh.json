@@ -4,6 +4,7 @@
     "menu": {
       "audioConversion": "音频格式转换",
       "videoConversion": "视频格式转换",
+      "videoAudioExtraction": "视频分离音频",
       "about": "关于"
     }
   },
@@ -40,6 +41,10 @@
       "mov": "MOV",
       "webm": "WebM"
     }
+  },
+  "videoAudio": {
+    "title": "视频分离音频",
+    "description": "从视频文件中提取音频轨道并保存为各种音频格式"
   },
   "about": {
     "title": "关于 TransDuck",

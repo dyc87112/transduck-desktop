@@ -4,6 +4,7 @@
     "menu": {
       "audioConversion": "Audio Conversion",
       "videoConversion": "Video Conversion",
+      "videoAudioExtraction": "Extract Audio from Video",
       "about": "About"
     }
   },
@@ -40,6 +41,10 @@
       "mov": "MOV",
       "webm": "WebM"
     }
+  },
+  "videoAudio": {
+    "title": "Extract Audio from Video",
+    "description": "Extract audio tracks from video files and save them in various audio formats"
   },
   "about": {
     "title": "About TransDuck",
