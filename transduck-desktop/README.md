@@ -32,26 +32,34 @@ sh rustup-init.sh
 brew install nsis
 # Install LLVM and the LLD Linker
 brew install llvm
-# Install the Windows Rust target
-rustup target add x86_64-pc-windows-msvc
-
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 # Install cargo-xwin
 cargo install --locked cargo-xwin
 ```
 
-```bash
-# 32位系统和ARM系统打包需要的依赖
-rustup target add aarch64-pc-windows-msvc
-rustup target add i686-pc-windows-msvc
-```
-
-2. 开始打包
+2. Windows 64位系统打包
 
 ```bash
+rustup target add x86_64-pc-windows-msvc
 # 为64位系统打包
 npm run tauri build -- --runner cargo-xwin --target x86_64-pc-windows-msvc
-# 为32位系统打包
-npm run tauri build -- --target i686-pc-windows-msvc
-# 为ARM系统打包
-npm run tauri build -- --target aarch64-pc-windows-msvc
+```
+
+3. Windows 32位系统打包
+
+```bash
+# 32位系统打包需要的依赖
+rustup target add i686-pc-windows-msvc
+# 32位系统打包命令
+# ARM系统打包命令
+npm run tauri build -- --runner cargo-xwin --target i686-pc-windows-msvc
+```
+
+3. Windows ARM系统打包
+
+```bash
+# ARM系统打包需要的依赖
+rustup target add aarch64-pc-windows-msvc
+# ARM系统打包命令
+npm run tauri build -- --runner cargo-xwin --target aarch64-pc-windows-msvc
 ```
