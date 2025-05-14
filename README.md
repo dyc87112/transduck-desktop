@@ -20,8 +20,6 @@ TransDuck是一个基于Tauri和Vue实现的免费跨平台桌面应用，提供
 
 ## 核心功能
 
-![](assets/0.1.0.png)
-
 - 音频格式转换
 - 视频格式转换
 - 视频提取音频
@@ -30,7 +28,50 @@ TransDuck是一个基于Tauri和Vue实现的免费跨平台桌面应用，提供
 
 ## 安装与运行
 
-### 开发环境
+1. 安装核心依赖：`ffmpeg`
+
+**MacOS安装命令**
+
+```bash
+# 1. 使用brew安装ffmpeg
+brew install ffmpeg
+
+# 2. 验证安装
+ffmpeg -version
+```
+
+**Windows安装命令**
+
+```bash
+# 1. 安装Chocolatey（https://chocolatey.org/install）
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# 2. 使用Chocolatey安装ffmpeg
+choco install ffmpeg
+
+# 3. 验证安装
+ffmpeg -version
+```
+
+2. 验证`ffmpeg`的安装
+
+```bash
+# 打开终端运行，有显示版本信息即可
+ffmpeg -version
+```
+
+3. 根据系统环境，下载安装包进行安装
+
+- [TransDuck_0.1.0_arm64-setup.exe](https://a2.transduck.com/desktop/TransDuck_0.1.0_arm64-setup.exe)
+- [TransDuck_0.1.0_x64-setup.exe](https://a2.transduck.com/desktop/TransDuck_0.1.0_x64-setup.exe)
+
+4. 安装完成后，运行使用
+
+![](assets/0.1.0.png)
+
+## 开发与构建
+
+如果想在本地自己构建，可以按如下步骤实现：
 
 1. 安装依赖:
 
@@ -51,6 +92,7 @@ npm run tauri dev
 npm run tauri build
 ```
 
-## TODO
+## 后续计划
 
-1. 跨平台的客户端打包
+1. 优化ffmpeg的安装，减少用户自己配置的步骤
+2. 更多功能，包括 transduck.com 中的其他在线能力
