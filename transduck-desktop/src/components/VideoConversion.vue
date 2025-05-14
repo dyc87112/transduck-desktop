@@ -66,52 +66,44 @@
           </button>
         </div>
         
-        <!-- 转换状态 -->
-        <div v-if="isConverting" class="status-card">
-          <div class="converting-status">
-            <div class="status-icon-wrapper">
-              <i class="bi bi-arrow-repeat spin"></i>
+        <!-- 转换状态和结果 -->
+        <div class="status-container">
+          <!-- 转换中状态 -->
+          <div v-if="isConverting" class="status-inline converting">
+            <i class="bi bi-arrow-repeat spin status-icon"></i>
+            <div class="status-info">
+              <div class="status-text">{{ $t('common.converting') }} ({{ progress }}%)</div>
+              <div class="progress-bar">
+                <div class="progress-fill" :style="{ width: `${progress}%` }"></div>
+              </div>
             </div>
-            <h3>{{ $t('common.converting') }}</h3>
-            <button 
-              @click="cancelConversion" 
-              class="btn btn-outline-danger cancel-btn"
-            >
-              <i class="bi bi-x-circle"></i> {{ $t('common.cancel') }}
+            <button @click="cancelConversion" class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-x-circle"></i>
             </button>
           </div>
-        </div>
-        
-        <!-- 转换成功结果 -->
-        <div v-if="conversionCompleted && !conversionError" class="result-card success">
-          <div class="result-header">
-            <div class="result-icon-wrapper success">
-              <i class="bi bi-check-circle-fill"></i>
+
+          <!-- 转换成功状态 -->
+          <div v-if="conversionCompleted && !conversionError" class="status-inline success">
+            <i class="bi bi-check-circle-fill status-icon"></i>
+            <div class="status-info">
+              <div class="status-text">{{ $t('common.completed') }}</div>
+              <div class="output-info">
+                <!-- <i class="bi bi-file-earmark-video"></i> -->
+                <span class="path-text" :title="outputPath">{{ outputPath }}</span>
+              </div>
             </div>
-            <h4>{{ $t('common.completed') }}</h4>
-          </div>
-          <div class="result-content">
-            <div class="output-path">
-              <i class="bi bi-file-earmark-check"></i> 
-              <span>{{ $t('common.outputLocation') }}:</span>
-              <code class="path-text">{{ outputPath }}</code>
-            </div>
-            <button @click="openOutputFolder" class="btn btn-outline-primary open-btn">
-              <i class="bi bi-folder2-open"></i> {{ $t('common.open') }}
+            <button @click="openOutputFolder" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-folder2-open"></i>
             </button>
           </div>
-        </div>
-        
-        <!-- 转换失败结果 -->
-        <div v-if="conversionError" class="result-card error">
-          <div class="result-header">
-            <div class="result-icon-wrapper error">
-              <i class="bi bi-exclamation-triangle-fill"></i>
+
+          <!-- 转换失败状态 -->
+          <div v-if="conversionError" class="status-inline error">
+            <i class="bi bi-exclamation-triangle-fill status-icon"></i>
+            <div class="status-info">
+              <div class="status-text">{{ $t('common.failed') }}</div>
+              <div class="error-text">{{ conversionError }}</div>
             </div>
-            <h4>{{ $t('common.failed') }}</h4>
-          </div>
-          <div class="result-content">
-            <div class="error-message">{{ conversionError }}</div>
           </div>
         </div>
       </div>
@@ -345,95 +337,103 @@ const openOutputFolder = async () => {
   cursor: not-allowed;
 }
 
-/* 状态卡片样式 */
-.converting-status {
+/* 状态容器样式 */
+.status-container {
+  margin-top: 20px;
+}
+
+.status-inline {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.status-icon {
+  font-size: 1.25rem;
+  width: 24px;
   text-align: center;
 }
 
-.status-icon-wrapper {
-  font-size: 2.5rem;
-  height: 70px;
-  width: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(67, 97, 238, 0.1);
-  border-radius: 50%;
-  margin-bottom: 8px;
+.status-info {
+  flex: 1;
+  min-width: 0;
 }
 
-.converting-status h3 {
-  margin: 0;
-  font-weight: 600;
+.status-text {
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 
-/* 结果卡片样式 */
-.result-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+.progress-bar {
+  height: 4px;
+  background-color: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-.result-icon-wrapper {
-  height: 50px;
-  width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 1.5rem;
+.progress-fill {
+  height: 100%;
+  background-color: #4361ee;
+  transition: width 0.3s ease;
 }
 
-.result-icon-wrapper.success {
-  background-color: rgba(16, 185, 129, 0.1);
-  color: #10b981;
-}
-
-.result-icon-wrapper.error {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
-}
-
-.result-content {
-  padding: 16px 0;
-}
-
-.output-path {
+.output-info {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(0, 0, 0, 0.02);
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.output-path i {
-  color: #10b981;
+  font-size: 0.9rem;
+  color: #64748b;
 }
 
 .path-text {
   font-family: monospace;
-  word-break: break-all;
-  background-color: rgba(0, 0, 0, 0.03);
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-left: 4px;
-  flex: 1;
+  max-width: 100%;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.error-message {
-  background-color: rgba(239, 68, 68, 0.05);
-  padding: 12px 16px;
-  border-radius: 8px;
+.error-text {
+  font-size: 0.9rem;
   color: #b91c1c;
-  font-size: 0.95rem;
+}
+
+/* 状态变体样式 */
+.status-inline.converting {
+  border: 1px solid #4361ee;
+}
+
+.status-inline.converting .status-icon {
+  color: #4361ee;
+}
+
+.status-inline.success {
+  border: 1px solid #10b981;
+}
+
+.status-inline.success .status-icon {
+  color: #10b981;
+}
+
+.status-inline.error {
+  border: 1px solid #ef4444;
+}
+
+.status-inline.error .status-icon {
+  color: #ef4444;
+}
+
+/* 按钮样式调整 */
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.875rem;
+}
+
+.btn-sm i {
+  font-size: 1rem;
 }
 
 /* 响应式调整 */
