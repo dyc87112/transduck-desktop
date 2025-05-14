@@ -13,10 +13,10 @@
     "windows": [
       {
         "title": "TransDuck",
-        "width": 1024,
-        "height": 768,
-        "minWidth": 800,
-        "minHeight": 600,
+        "width": 1200,
+        "height": 800,
+        "minWidth": 1200,
+        "minHeight": 800,
         "center": true
       }
     ],

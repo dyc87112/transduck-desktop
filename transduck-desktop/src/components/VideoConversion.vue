@@ -58,7 +58,7 @@
         <div class="action-area">
           <button 
             @click="startConversion" 
-            class="btn btn-success conversion-btn" 
+            class="btn btn-success conversion-btn w-100" 
             :disabled="!selectedFile || isConverting"
           >
             <i class="bi" :class="isConverting ? 'bi-arrow-repeat spin' : 'bi-arrow-right-circle'"></i>
