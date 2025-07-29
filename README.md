@@ -6,7 +6,7 @@
 
 TransDuck是一个基于Tauri和Vue实现的免费跨平台桌面应用，提供各种音频/视频的处理能力。
 
-- 官方网站：https://transduck.com/
+- 官方网站：https://transduck.cc/
 - 开源地址：https://github.com/dyc87112/transduck-desktop
 
 > 目前SaaS版本的功能还未全部整合入客户端版本，后续会逐步加入到客户端，尽请期待 ^_^
@@ -62,8 +62,8 @@ ffmpeg -version
 
 3. 根据系统环境，下载安装包进行安装
 
-- [TransDuck_0.1.0_arm64-setup.exe](https://a2.transduck.com/desktop/TransDuck_0.1.0_arm64-setup.exe)
-- [TransDuck_0.1.0_x64-setup.exe](https://a2.transduck.com/desktop/TransDuck_0.1.0_x64-setup.exe)
+- [TransDuck_0.1.0_arm64-setup.exe](https://s.transduck.com/transduck/desktop/TransDuck_0.1.0_arm64-setup.exe)
+- [TransDuck_0.1.0_x64-setup.exe](https://s.transduck.com/transduck/desktop/TransDuck_0.1.0_x64-setup.exe)
 
 4. 安装完成后，运行使用
 
